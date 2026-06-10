@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto-Marketer AI Orchestration Dashboard</title>
+    <!-- Premium Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(17, 24, 39, 0.65);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --primary-grad: linear-gradient(135deg, #8338ec 0%, #3a86c8 50%, #00f5d4 100%);
+            --accent-pink: #ff007f;
+            --accent-purple: #8338ec;
+            --accent-blue: #3a86c8;
+            --accent-cyan: #00f5d4;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --glow: 0 0 25px rgba(131, 56, 236, 0.25);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(131, 56, 236, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(0, 245, 212, 0.08) 0%, transparent 40%);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        /* Header Style */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 48px;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 24px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            font-size: 32px;
+            background: var(--primary-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 10px rgba(131, 56, 236, 0.4));
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #ffffff 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 14px;
+            color: var(--text-muted);
+            border-left: 2px solid var(--accent-purple);
+            padding-left: 12px;
+            height: fit-content;
+        }
+
+        /* Glass Card Utility */
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 32px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        /* Scraper Input Section */
+        .input-section {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .input-title {
+            font-size: 20px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .input-title i {
+            color: var(--accent-cyan);
+        }
+
+        .input-row {
+            display: flex;
+            gap: 16px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            flex-grow: 1;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 18px;
+            transition: var(--transition);
+        }
+
+        .url-input {
+            width: 100%;
+            padding: 18px 20px 18px 56px;
+            background: rgba(10, 10, 18, 0.6);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            color: var(--text-main);
+            font-size: 16px;
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .url-input:focus {
+            border-color: var(--accent-purple);
+            box-shadow: var(--glow);
+        }
+
+        .url-input:focus + i {
+            color: var(--accent-purple);
+        }
+
+        .btn-generate {
+            padding: 0 32px;
+            background: var(--primary-grad);
+            border: none;
+            border-radius: 16px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 20px rgba(131, 56, 236, 0.35);
+        }
+
+        .btn-generate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(131, 56, 236, 0.5);
+            filter: brightness(1.1);
+        }
+
+        .btn-generate:active {
+            transform: translateY(0);
+        }
+
+        .btn-generate:disabled {
+            background: #2d3748;
+            color: var(--text-muted);
+            box-shadow: none;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Pipeline Logger Loader */
+        .pipeline-loader {
+            display: none;
+            margin-bottom: 40px;
+            border-left: 4px solid var(--accent-purple);
+        }
+
+        .loader-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: var(--transition);
+        }
+
+        .step-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+
+        .step-item.pending .step-icon {
+            color: var(--text-muted);
+        }
+
+        .step-item.active .step-icon {
+            background: rgba(131, 56, 236, 0.15);
+            color: var(--accent-purple);
+            box-shadow: 0 0 15px rgba(131, 56, 236, 0.2);
+            animation: pulse-glow 1.5s infinite alternate;
+        }
+
+        .step-item.success .step-icon {
+            background: rgba(0, 245, 212, 0.15);
+            color: var(--accent-cyan);
+        }
+
+        .step-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .step-title {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .step-status {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        @keyframes pulse-glow {
+            from { box-shadow: 0 0 5px rgba(131, 56, 236, 0.1); }
+            to { box-shadow: 0 0 15px rgba(131, 56, 236, 0.4); }
+        }
+
+        /* Error Message Banner */
+        .error-banner {
+            display: none;
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 16px 24px;
+            border-radius: 16px;
+            color: #fca5a5;
+            margin-bottom: 40px;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .error-banner i {
+            font-size: 22px;
+        }
+
+        /* Active Result Grid */
+        .result-section {
+            display: none;
+            margin-bottom: 48px;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+
+        @media (min-width: 900px) {
+            .result-grid {
+                grid-template-columns: 4.5fr 5.5fr;
+            }
+        }
+
+        /* Visual Graphic Column */
+        .image-col {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .image-frame {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            position: relative;
+            background: #111827;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .image-frame img:hover {
+            transform: scale(1.02);
+        }
+
+        .fallback-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(245, 158, 11, 0.9);
+            color: #000;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-download {
+            width: 100%;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            color: var(--text-main);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: var(--transition);
+        }
+
+        .btn-download:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Metadata Details Column */
+        .details-col {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .campaign-header {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .brand-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .badge {
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+        }
+
+        .badge.tone {
+            background: rgba(131, 56, 236, 0.12);
+            color: #c084fc;
+            border-color: rgba(131, 56, 236, 0.25);
+        }
+
+        .badge.source {
+            background: rgba(0, 245, 212, 0.1);
+            color: #2dd4bf;
+            border-color: rgba(0, 245, 212, 0.2);
+        }
+
+        .campaign-title {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+        }
+
+        .campaign-url {
+            color: var(--text-muted);
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            width: fit-content;
+        }
+
+        .campaign-url:hover {
+            color: var(--accent-blue);
+            text-decoration: underline;
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-label i {
+            color: var(--accent-purple);
+        }
+
+        .caption-box {
+            position: relative;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .caption-text {
+            font-size: 18px;
+            line-height: 1.6;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .btn-copy {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            color: var(--text-main);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .btn-copy:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .accordion {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            padding: 16px 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.02);
+            transition: var(--transition);
+        }
+
+        .accordion-header:hover {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .accordion-content {
+            padding: 24px;
+            border-top: 1px solid var(--card-border);
+            display: none;
+        }
+
+        .prompt-text {
+            font-family: monospace;
+            background: #060814;
+            padding: 16px;
+            border-radius: 10px;
+            font-size: 13px;
+            line-height: 1.5;
+            color: #cbd5e1;
+            white-space: pre-wrap;
+        }
+
+        /* Gallery/History Layout */
+        .history-section {
+            margin-top: 48px;
+        }
+
+        .history-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 12px;
+        }
+
+        .history-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .gallery-card {
+            background: rgba(17, 24, 39, 0.40);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(131, 56, 236, 0.30);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        .gallery-thumb {
+            width: 100%;
+            aspect-ratio: 16/10;
+            overflow: hidden;
+            background: #111827;
+            position: relative;
+        }
+
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-fallback-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(245, 158, 11, 0.95);
+            color: black;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .gallery-body {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex-grow: 1;
+        }
+
+        .gallery-title {
+            font-size: 16px;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .gallery-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .gallery-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            height: 36px;
+        }
+
+        .empty-history {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 0;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .empty-history i {
+            font-size: 48px;
+            color: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Search Filter and Delete Button Styling */
+        .search-box {
+            position: relative;
+            width: 280px;
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 40px 10px 15px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            color: var(--text-main);
+            font-size: 14px;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-purple);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 15px rgba(131, 56, 236, 0.15);
+        }
+
+        .btn-delete {
+            width: 100%;
+            padding: 16px;
+            background: rgba(239, 68, 68, 0.08);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 14px;
+            color: #fca5a5;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 12px;
+            transition: var(--transition);
+        }
+
+        .btn-delete:hover {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: rgba(239, 68, 68, 0.4);
+            color: #ef4444;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Dashboard Header -->
+        <header>
+            <div class="logo-area">
+                <i class="fa-solid fa-wand-magic-sparkles logo-icon"></i>
+                <div class="logo-text">Auto-Marketer</div>
+            </div>
+            <div class="tagline">AI Content Orchestration Pipeline</div>
+        </header>
+
+        <!-- Dynamic Form Section -->
+        <section class="glass-card input-section">
+            <h2 class="input-title">
+                <i class="fa-solid fa-link"></i> Launch Campaign Automation
+            </h2>
+            <div class="input-row">
+                <div class="input-wrapper">
+                    <input type="url" id="urlInput" placeholder="Enter landing page or website URL (e.g. apple.com)..." class="url-input" required autocomplete="off">
+                    <i class="fa-solid fa-globe"></i>
+                </div>
+                <button id="btnSubmit" class="btn-generate" onclick="triggerAutomation()">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span>Generate Campaign</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Interactive Process Logger -->
+        <section id="pipelineLoader" class="glass-card pipeline-loader">
+            <div class="loader-grid">
+                <div class="step-item pending" id="step-scrape">
+                    <div class="step-icon"><i class="fa-solid fa-spider"></i></div>
+                    <div class="step-info">
+                        <span class="step-title">Scraping Page</span>
+                        <span class="step-status">Pending...</span>
+                    </div>
+                </div>
+                <div class="step-item pending" id="step-synthesis">
+                    <div class="step-icon"><i class="fa-solid fa-brain"></i></div>
+                    <div class="step-info">
+                        <span class="step-title">Caption Synthesis</span>
+                        <span class="step-status">Pending...</span>
+                    </div>
+                </div>
+                <div class="step-item pending" id="step-image">
+                    <div class="step-icon"><i class="fa-solid fa-palette"></i></div>
+                    <div class="step-info">
+                        <span class="step-title">Image Generation</span>
+                        <span class="step-status">Pending...</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Error Banner -->
+        <div id="errorBanner" class="error-banner">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span id="errorMessage">Execution error detail goes here.</span>
+        </div>
+
+        <!-- Active Campaign Results Display -->
+        <section id="resultSection" class="result-section">
+            <div class="result-grid">
+                <!-- Visual Card Column -->
+                <div class="image-col">
+                    <div class="image-frame">
+                        <span id="fallbackBadge" class="fallback-badge" style="display: none;">
+                            <i class="fa-solid fa-palette"></i> Local PIL Graphic
+                        </span>
+                        <img id="resultImage" src="" alt="Marketing Campaign Graphic">
+                    </div>
+                    <a id="btnDownload" class="btn-download" download="campaign_graphic.png" href="" target="_blank">
+                        <i class="fa-solid fa-download"></i> Download Graphic
+                    </a>
+                    <button id="btnDeleteActive" class="btn-delete" onclick="deleteActiveCampaign()">
+                        <i class="fa-solid fa-trash-can"></i> Delete Campaign
+                    </button>
+                </div>
+
+                <!-- Text & Metadata Details Column -->
+                <div class="details-col">
+                    <div class="campaign-header">
+                        <div class="brand-meta">
+                            <span id="resultTone" class="badge tone">Bold & Premium</span>
+                            <span id="resultSource" class="badge source">scraped_live</span>
+                        </div>
+                        <h2 id="resultTitle" class="campaign-title">Product Title</h2>
+                        <a id="resultUrl" class="campaign-url" href="" target="_blank">
+                            <span>website.com</span>
+                            <i class="fa-solid fa-up-right-from-square"></i>
+                        </a>
+                    </div>
+
+                    <!-- Marketing Text Block -->
+                    <div>
+                        <span class="section-label">
+                            <i class="fa-solid fa-quote-left"></i> Ad Copy & Caption
+                        </span>
+                        <div class="caption-box">
+                            <p id="resultCaption" class="caption-text">Marketing caption text will be loaded here.</p>
+                            <button class="btn-copy" onclick="copyCaption()">
+                                <i class="fa-regular fa-copy"></i>
+                                <span id="copyBtnText">Copy Caption</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Prompts Accordion -->
+                    <div class="accordion">
+                        <div class="accordion-header" onclick="toggleAccordion()">
+                            <span><i class="fa-solid fa-sliders"></i> SDXL Image Generator Prompt</span>
+                            <i id="accordionChevron" class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div id="accordionContent" class="accordion-content">
+                            <pre id="resultPrompt" class="prompt-text">Detailed prompt contents here...</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Campaigns Gallery History -->
+        <section class="history-section">
+            <div class="history-header">
+                <h2><i class="fa-solid fa-images"></i> Generated Campaigns Gallery</h2>
+                <div class="search-box">
+                    <input type="text" id="searchBar" placeholder="Search by title, domain, or tone..." oninput="filterHistory()" class="search-input">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+            </div>
+            <div id="historyGrid" class="history-grid">
+                <!-- Generated card items loaded via AJAX -->
+                <div class="empty-history">
+                    <i class="fa-regular fa-image"></i>
+                    <span>No campaigns generated yet. Enter a URL above to start!</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer with Developer Credits -->
+        <footer style="margin-top: 80px; text-align: center; border-top: 1px solid var(--card-border); padding-top: 24px; color: var(--text-muted); font-size: 14px;">
+            <p>Designed & Developed by <strong>Navneet Yadav</strong> &copy; 2026. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Application Scripting -->
+    <script>
+        // Set of generated campaigns
+        let campaignHistory = [];
+        let activeCampaignId = null;
+
+        // On document load
+        window.addEventListener("DOMContentLoaded", () => {
+            loadHistory();
+        });
+
+        // Toggle prompt accordion open/close
+        function toggleAccordion() {
+            const content = document.getElementById("accordionContent");
+            const chevron = document.getElementById("accordionChevron");
+            
+            if (content.style.display === "block") {
+                content.style.display = "none";
+                chevron.classList.replace("fa-chevron-up", "fa-chevron-down");
+            } else {
+                content.style.display = "block";
+                chevron.classList.replace("fa-chevron-down", "fa-chevron-up");
+            }
+        }
+
+        // Copy active caption text to clipboard
+        function copyCaption() {
+            const captionText = document.getElementById("resultCaption").innerText;
+            const btnText = document.getElementById("copyBtnText");
+            
+            navigator.clipboard.writeText(captionText).then(() => {
+                btnText.innerText = "Copied!";
+                setTimeout(() => {
+                    btnText.innerText = "Copy Caption";
+                }, 2000);
+            }).catch(err => {
+                console.error("Clipboard copy failed: ", err);
+            });
+        }
+
+        // Retrieve generated campaigns from backend API
+        async function loadHistory() {
+            try {
+                const response = await fetch("/api/campaigns");
+                if (!response.ok) throw new Error("Failed to load history.");
+                
+                campaignHistory = await response.json();
+                renderHistory();
+            } catch (err) {
+                console.error("History fetch error:", err);
+            }
+        }
+
+        // Render previous campaigns in gallery grid
+        function renderHistory() {
+            const grid = document.getElementById("historyGrid");
+            grid.innerHTML = "";
+
+            if (campaignHistory.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-history">
+                        <i class="fa-regular fa-image"></i>
+                        <span>No campaigns generated yet. Enter a URL above to start!</span>
+                    </div>`;
+                return;
+            }
+
+            campaignHistory.forEach(campaign => {
+                const card = document.createElement("div");
+                card.className = "gallery-card";
+                card.onclick = () => selectCampaign(campaign.campaign_id);
+
+                const isLocalFallback = campaign.scrape_source === "fallback_url_heuristics" || 
+                                        campaign.status === "Success_With_Failed_Image" ||
+                                        (campaign.files.image && campaign.image_prompt.includes("Fallback"));
+                
+                const imgSrc = `/api/campaigns/${campaign.campaign_id}/image`;
+                const date = new Date(campaign.timestamp).toLocaleDateString(undefined, {
+                    month: "short", day: "numeric", hour: "2-digit", minute: "2-digit"
+                });
+
+                card.innerHTML = `
+                    <div class="gallery-thumb">
+                        ${isLocalFallback ? `<span class="gallery-fallback-badge">PIL Draw</span>` : ""}
+                        <img src="${imgSrc}" alt="${campaign.title}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27100%27 height=%27100%27><rect width=%27100%27 height=%27100%27 fill=%27%232d3748%27/></svg>'">
+                    </div>
+                    <div class="gallery-body">
+                        <div class="gallery-title">${campaign.title}</div>
+                        <p class="gallery-desc">${campaign.caption}</p>
+                        <div class="gallery-meta">
+                            <span style="color:var(--accent-cyan);font-weight:600;">${campaign.domain}</span>
+                            <span>${date}</span>
+                        </div>
+                    </div>`;
+                grid.appendChild(card);
+            });
+        }
+
+        // Select a campaign from history to view in dashboard focus panel
+        function selectCampaign(campaignId) {
+            const campaign = campaignHistory.find(c => c.campaign_id === campaignId);
+            if (!campaign) return;
+
+            activeCampaignId = campaignId;
+            document.getElementById("resultSection").style.display = "block";
+            
+            // Populate data
+            document.getElementById("resultTitle").innerText = campaign.title;
+            document.getElementById("resultUrl").href = campaign.url;
+            document.getElementById("resultUrl").querySelector("span").innerText = campaign.domain;
+            document.getElementById("resultTone").innerText = campaign.tone;
+            document.getElementById("resultSource").innerText = campaign.scrape_source;
+            document.getElementById("resultCaption").innerText = campaign.caption;
+            document.getElementById("resultPrompt").innerText = campaign.image_prompt;
+            
+            // Set image and download sources
+            const imgSrc = `/api/campaigns/${campaignId}/image`;
+            document.getElementById("resultImage").src = imgSrc;
+            document.getElementById("btnDownload").href = imgSrc;
+            
+            // Handle badge display for fallbacks
+            const isLocalFallback = campaign.scrape_source === "fallback_url_heuristics" || 
+                                    campaign.status === "Success_With_Failed_Image";
+            document.getElementById("fallbackBadge").style.display = isLocalFallback ? "flex" : "none";
+            
+            // Auto scroll to focused result
+            document.getElementById("resultSection").scrollIntoView({ behavior: "smooth" });
+        }
+
+        // Trigger dynamic marketing orchestration pipeline
+        async function triggerAutomation() {
+            const urlInput = document.getElementById("urlInput");
+            const btnSubmit = document.getElementById("btnSubmit");
+            const loader = document.getElementById("pipelineLoader");
+            const errorBanner = document.getElementById("errorBanner");
+            const resultSection = document.getElementById("resultSection");
+            
+            const url = urlInput.value.trim();
+            if (!url) return;
+
+            // Client-side URL Pattern Check
+            const urlPattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/i;
+            if (!urlPattern.test(url)) {
+                errorBanner.style.display = "flex";
+                document.getElementById("errorMessage").innerText = "Please enter a valid landing page URL (e.g., apple.com or https://google.com).";
+                return;
+            }
+
+            // UI Reset
+            errorBanner.style.display = "none";
+            loader.style.display = "block";
+            btnSubmit.disabled = true;
+            urlInput.disabled = true;
+            resultSection.style.display = "none";
+
+            // Initialize progress steps
+            setStepState("step-scrape", "active", "Scraping page content...");
+            setStepState("step-synthesis", "pending", "Pending...");
+            setStepState("step-image", "pending", "Pending...");
+
+            // Simulated micro timing for satisfying UI aesthetic feedback
+            await new Promise(resolve => setTimeout(resolve, 800));
+
+            try {
+                // Call generation API
+                setStepState("step-scrape", "active", "Scraping page content...");
+                
+                const response = await fetch("/api/generate", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ url: url })
+                });
+
+                if (!response.ok) {
+                    const data = await response.json();
+                    throw new Error(data.error || "Automation failed midway.");
+                }
+
+                // Update scraping step
+                setStepState("step-scrape", "success", "Completed!");
+                setStepState("step-synthesis", "active", "Analyzing tone & drafting caption...");
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                const data = await response.json();
+                
+                // Update synthesis step
+                setStepState("step-synthesis", "success", `Tone: ${data.metadata.tone}`);
+                setStepState("step-image", "active", "Generating SDXL / PIL graphic...");
+                await new Promise(resolve => setTimeout(resolve, 800));
+                
+                // Finalize steps
+                setStepState("step-image", "success", "Completed successfully!");
+                await new Promise(resolve => setTimeout(resolve, 500));
+                
+                // Hide loader, refresh gallery and select generated campaign
+                loader.style.display = "none";
+                await loadHistory();
+                selectCampaign(data.campaign_id);
+
+            } catch (err) {
+                console.error("Pipeline failure:", err);
+                loader.style.display = "none";
+                errorBanner.style.display = "flex";
+                document.getElementById("errorMessage").innerText = err.message;
+            } finally {
+                // Unlock input controls
+                btnSubmit.disabled = false;
+                urlInput.disabled = false;
+            }
+        }
+
+        // Helper to update progress step states
+        function setStepState(stepId, state, statusText) {
+            const stepEl = document.getElementById(stepId);
+            stepEl.className = `step-item ${state}`;
+            
+            const statusEl = stepEl.querySelector(".step-status");
+            statusEl.innerText = statusText;
+            
+            const iconEl = stepEl.querySelector(".step-icon i");
+            if (state === "success") {
+                iconEl.className = "fa-solid fa-circle-check";
+            } else if (state === "active") {
+                if (stepId === "step-scrape") iconEl.className = "fa-solid fa-spider fa-spin";
+                if (stepId === "step-synthesis") iconEl.className = "fa-solid fa-brain fa-pulse";
+                if (stepId === "step-image") iconEl.className = "fa-solid fa-palette fa-spin";
+            } else {
+                if (stepId === "step-scrape") iconEl.className = "fa-solid fa-spider";
+                if (stepId === "step-synthesis") iconEl.className = "fa-solid fa-brain";
+                if (stepId === "step-image") iconEl.className = "fa-solid fa-palette";
+            }
+        }
+
+        // Delete the currently active focused campaign
+        async function deleteActiveCampaign() {
+            if (!activeCampaignId) return;
+            if (!confirm("Are you sure you want to permanently delete this campaign? This action cannot be undone.")) return;
+            
+            try {
+                const response = await fetch(`/api/campaigns/${activeCampaignId}`, {
+                    method: "DELETE"
+                });
+                
+                const result = await response.json();
+                if (!response.ok) {
+                    throw new Error(result.error || "Failed to delete campaign.");
+                }
+                
+                // Hide result focus display
+                document.getElementById("resultSection").style.display = "none";
+                activeCampaignId = null;
+                
+                // Reload history grid
+                await loadHistory();
+            } catch (err) {
+                alert("Error deleting campaign: " + err.message);
+            }
+        }
+
+        // Filter campaign history in real-time
+        function filterHistory() {
+            const query = document.getElementById("searchBar").value.toLowerCase().trim();
+            if (!query) {
+                renderHistory();
+                return;
+            }
+            
+            const filtered = campaignHistory.filter(c => {
+                return (c.title && c.title.toLowerCase().includes(query)) || 
+                       (c.domain && c.domain.toLowerCase().includes(query)) || 
+                       (c.tone && c.tone.toLowerCase().includes(query));
+            });
+            
+            renderFilteredHistory(filtered);
+        }
+
+        // Render filtered history cards
+        function renderFilteredHistory(filteredList) {
+            const grid = document.getElementById("historyGrid");
+            grid.innerHTML = "";
+
+            if (filteredList.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-history">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <span>No matching campaigns found. Try another query!</span>
+                    </div>`;
+                return;
+            }
+
+            filteredList.forEach(campaign => {
+                const card = document.createElement("div");
+                card.className = "gallery-card";
+                card.onclick = () => selectCampaign(campaign.campaign_id);
+
+                const isLocalFallback = campaign.scrape_source === "fallback_url_heuristics" || 
+                                        campaign.status === "Success_With_Failed_Image" ||
+                                        (campaign.files.image && campaign.image_prompt.includes("Fallback"));
+                
+                const imgSrc = `/api/campaigns/${campaign.campaign_id}/image`;
+                const date = new Date(campaign.timestamp).toLocaleDateString(undefined, {
+                    month: "short", day: "numeric", hour: "2-digit", minute: "2-digit"
+                });
+
+                card.innerHTML = `
+                    <div class="gallery-thumb">
+                        ${isLocalFallback ? `<span class="gallery-fallback-badge">PIL Draw</span>` : ""}
+                        <img src="${imgSrc}" alt="${campaign.title}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27100%27 height=%27100%27><rect width=%27100%27 height=%27100%27 fill=%27%232d3748%27/></svg>'">
+                    </div>
+                    <div class="gallery-body">
+                        <div class="gallery-title">${campaign.title}</div>
+                        <p class="gallery-desc">${campaign.caption}</p>
+                        <div class="gallery-meta">
+                            <span style="color:var(--accent-cyan);font-weight:600;">${campaign.domain}</span>
+                            <span>${date}</span>
+                        </div>
+                    </div>`;
+                grid.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>

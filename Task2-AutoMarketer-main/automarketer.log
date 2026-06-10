@@ -1,0 +1,70 @@
+2026-06-10 22:13:30,439 [INFO] automarketer.main: ============================================================
+2026-06-10 22:13:30,440 [INFO] automarketer.main: STARTING AUTO-MARKETER PIPELINE FOR: https://github.com
+2026-06-10 22:13:30,440 [INFO] automarketer.main: ============================================================
+2026-06-10 22:13:30,440 [INFO] automarketer.main: [1/3] Scraping Website Content...
+2026-06-10 22:13:30,440 [INFO] automarketer.scraper: Attempting live scrape for https://github.com (Attempt 1/4)...
+2026-06-10 22:13:31,310 [INFO] automarketer.main: [+] Scraping completed in 0.87s (scraped_live)
+2026-06-10 22:13:31,311 [INFO] automarketer.main:     Title: GitHub · Change is constant. GitHub keeps you ahead. · GitHub
+2026-06-10 22:13:31,311 [INFO] automarketer.main:     Domain: github.com
+2026-06-10 22:13:31,311 [INFO] automarketer.main:     Content Length: 2468 characters
+2026-06-10 22:13:31,312 [INFO] automarketer.main: [2/3] Chaining LLM for Caption Synthesis & Image Prompt Translation...
+2026-06-10 22:13:31,312 [INFO] automarketer.llm: Gemini API not configured. Triggering rule-based fallback campaign.
+2026-06-10 22:13:31,312 [INFO] automarketer.main: [+] LLM processing completed in 0.00s
+2026-06-10 22:13:31,312 [INFO] automarketer.main:     Tone: Professional & Clean (Fallback)
+2026-06-10 22:13:31,312 [INFO] automarketer.main:     Marketing Caption: Discover the future of GitHub today. Experience premium quality, innovative features, and unmatched service tailored to your needs! Visit github.com to learn more and get started!
+2026-06-10 22:13:31,312 [INFO] automarketer.main:     Image Prompt: A clean, modern commercial banner for GitHub · Change is constant. GitHub keeps you ahead. · GitHub. Featuring a premium...
+2026-06-10 22:13:31,316 [INFO] automarketer.main: [3/3] Generating Visual Assets...
+2026-06-10 22:13:31,316 [WARNING] automarketer.image_generator: HF_API_TOKEN not found in environment. Utilizing local graphic generator.
+2026-06-10 22:13:31,317 [INFO] automarketer.image_generator: Generating a local premium graphic fallback using Pillow...
+2026-06-10 22:13:31,318 [INFO] automarketer.image_generator: Downloading Google Font: Outfit-Bold.ttf from Github Fonts repository...
+2026-06-10 22:13:32,568 [WARNING] automarketer.image_generator: Failed to download font Outfit-Bold.ttf (HTTP 404).
+2026-06-10 22:13:32,569 [INFO] automarketer.image_generator: Downloading Google Font: Inter-Medium.ttf from Github Fonts repository...
+2026-06-10 22:13:33,626 [WARNING] automarketer.image_generator: Failed to download font Inter-Medium.ttf (HTTP 404).
+2026-06-10 22:13:33,627 [INFO] automarketer.image_generator: Downloading Google Font: Inter-Regular.ttf from Github Fonts repository...
+2026-06-10 22:13:34,726 [WARNING] automarketer.image_generator: Failed to download font Inter-Regular.ttf (HTTP 404).
+2026-06-10 22:13:35,481 [INFO] automarketer.image_generator: Local premium graphic fallback saved successfully to output\campaign_githubcom_20260610_221331\marketing_image.png
+2026-06-10 22:13:35,483 [INFO] automarketer.main: [+] Image assets generated in 4.17s
+2026-06-10 22:13:35,488 [INFO] automarketer.main: ============================================================
+2026-06-10 22:13:35,488 [INFO] automarketer.main: PIPELINE RUN COMPLETED
+2026-06-10 22:13:35,488 [INFO] automarketer.main: ============================================================
+2026-06-10 22:13:35,488 [INFO] automarketer.main:     Campaign Output Folder: output\campaign_githubcom_20260610_221331
+2026-06-10 22:13:35,488 [INFO] automarketer.main:     Paired Assets:
+2026-06-10 22:13:35,488 [INFO] automarketer.main:        - Caption: output\campaign_githubcom_20260610_221331\caption.txt
+2026-06-10 22:13:35,489 [INFO] automarketer.main:        - Image: output\campaign_githubcom_20260610_221331\marketing_image.png
+2026-06-10 22:13:35,489 [INFO] automarketer.main:     Saved 'Latest' Shortcut in: output\latest/
+2026-06-10 22:13:35,489 [INFO] automarketer.main: ============================================================
+2026-06-10 22:16:27,069 [INFO] automarketer.main: ============================================================
+2026-06-10 22:16:27,069 [INFO] automarketer.main: STARTING AUTO-MARKETER PIPELINE FOR: https://github.com
+2026-06-10 22:16:27,069 [INFO] automarketer.main: ============================================================
+2026-06-10 22:16:27,069 [INFO] automarketer.main: [1/3] Scraping Website Content...
+2026-06-10 22:16:27,069 [INFO] automarketer.scraper: Attempting live scrape for https://github.com (Attempt 1/4)...
+2026-06-10 22:16:27,849 [INFO] automarketer.main: [+] Scraping completed in 0.78s (scraped_live)
+2026-06-10 22:16:27,850 [INFO] automarketer.main:     Title: GitHub · Change is constant. GitHub keeps you ahead. · GitHub
+2026-06-10 22:16:27,850 [INFO] automarketer.main:     Domain: github.com
+2026-06-10 22:16:27,850 [INFO] automarketer.main:     Content Length: 2468 characters
+2026-06-10 22:16:27,850 [INFO] automarketer.main: [2/3] Chaining LLM for Caption Synthesis & Image Prompt Translation...
+2026-06-10 22:16:27,850 [INFO] automarketer.llm: Gemini API not configured. Triggering rule-based fallback campaign.
+2026-06-10 22:16:27,850 [INFO] automarketer.main: [+] LLM processing completed in 0.00s
+2026-06-10 22:16:27,850 [INFO] automarketer.main:     Tone: Professional & Clean (Fallback)
+2026-06-10 22:16:27,850 [INFO] automarketer.main:     Marketing Caption: Discover the future of GitHub today. Experience premium quality, innovative features, and unmatched service tailored to your needs! Visit github.com to learn more and get started!
+2026-06-10 22:16:27,850 [INFO] automarketer.main:     Image Prompt: A clean, modern commercial banner for GitHub · Change is constant. GitHub keeps you ahead. · GitHub. Featuring a premium...
+2026-06-10 22:16:27,854 [INFO] automarketer.main: [3/3] Generating Visual Assets...
+2026-06-10 22:16:27,854 [WARNING] automarketer.image_generator: HF_API_TOKEN not found in environment. Utilizing local graphic generator.
+2026-06-10 22:16:27,855 [INFO] automarketer.image_generator: Generating a local premium graphic fallback using Pillow...
+2026-06-10 22:16:27,855 [INFO] automarketer.image_generator: Downloading Google Font: Outfit-Bold.ttf from Github Fonts repository...
+2026-06-10 22:16:29,197 [INFO] automarketer.image_generator: Font Outfit-Bold.ttf downloaded successfully to fonts\Outfit-Bold.ttf
+2026-06-10 22:16:29,198 [INFO] automarketer.image_generator: Downloading Google Font: Roboto-Medium.ttf from Github Fonts repository...
+2026-06-10 22:16:30,498 [INFO] automarketer.image_generator: Font Roboto-Medium.ttf downloaded successfully to fonts\Roboto-Medium.ttf
+2026-06-10 22:16:30,498 [INFO] automarketer.image_generator: Downloading Google Font: Roboto-Regular.ttf from Github Fonts repository...
+2026-06-10 22:16:31,774 [INFO] automarketer.image_generator: Font Roboto-Regular.ttf downloaded successfully to fonts\Roboto-Regular.ttf
+2026-06-10 22:16:31,848 [INFO] automarketer.image_generator: Local premium graphic fallback saved successfully to output\campaign_githubcom_20260610_221627\marketing_image.png
+2026-06-10 22:16:31,850 [INFO] automarketer.main: [+] Image assets generated in 4.00s
+2026-06-10 22:16:31,855 [INFO] automarketer.main: ============================================================
+2026-06-10 22:16:31,855 [INFO] automarketer.main: PIPELINE RUN COMPLETED
+2026-06-10 22:16:31,855 [INFO] automarketer.main: ============================================================
+2026-06-10 22:16:31,855 [INFO] automarketer.main:     Campaign Output Folder: output\campaign_githubcom_20260610_221627
+2026-06-10 22:16:31,855 [INFO] automarketer.main:     Paired Assets:
+2026-06-10 22:16:31,855 [INFO] automarketer.main:        - Caption: output\campaign_githubcom_20260610_221627\caption.txt
+2026-06-10 22:16:31,855 [INFO] automarketer.main:        - Image: output\campaign_githubcom_20260610_221627\marketing_image.png
+2026-06-10 22:16:31,855 [INFO] automarketer.main:     Saved 'Latest' Shortcut in: output\latest/
+2026-06-10 22:16:31,855 [INFO] automarketer.main: ============================================================
